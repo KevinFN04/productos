@@ -37,6 +37,12 @@ public class StockManager
      */
     public void delivery(int id, int amount)
     {
+        if (findProduct(id) != null){
+            findProduct(id).increaseQuantity(amount);
+        }
+        else{
+            System.out.println("No se ha encontrado ningun producto con el ID: " + id);
+        }
     }
     
     /**
