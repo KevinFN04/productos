@@ -125,4 +125,24 @@ public class StockManager
             }
         }
     }
+    
+    /**
+     * Try to find a product in the stock with the given name.
+     */
+    public Product findProduct(String name)
+    {
+        Product producto = null;
+        boolean encontrado = false;
+        int index = 0;
+        while(index < stock.size() && !encontrado)
+        {
+            if (stock.get(index).getName().contains(name))
+            {
+                producto = stock.get(index);
+                encontrado = true;
+            }
+            index++;
+        }
+        return producto;
+    }
 }
