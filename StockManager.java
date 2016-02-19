@@ -26,7 +26,20 @@ public class StockManager
      */
     public void addProduct(Product item)
     {
-        stock.add(item);
+        Product producto = null;
+        boolean repetido = false;
+        int index = 0;
+        while (!repetido && index < stock.size()){
+            producto = stock.get(index);
+            if (producto.getID() == item.getID()){
+                repetido = true;
+                System.out.println("Ese ID ya esta en Stock!");
+            }
+            index++;
+        }
+        if (repetido == false){
+            stock.add(item);
+        }
     }
 
     /**
