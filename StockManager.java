@@ -28,7 +28,7 @@ public class StockManager
     {
         stock.add(item);
     }
-    
+
     /**
      * Receive a delivery of a particular product.
      * Increase the quantity of the product by the given amount.
@@ -37,14 +37,15 @@ public class StockManager
      */
     public void delivery(int id, int amount)
     {
-        if (findProduct(id) != null){
-            findProduct(id).increaseQuantity(amount);
+        Product producto = findProduct(id);
+        if (producto != null){
+            producto.increaseQuantity(amount);
         }
         else{
             System.out.println("No se ha encontrado ningun producto con el ID: " + id);
         }
     }
-    
+
     /**
      * Try to find a product in the stock with the given id.
      * @return The identified product, or null if there is none
@@ -55,14 +56,14 @@ public class StockManager
         boolean encontrado = false;
         int index = 0;
         Product producto = null;
-        while (encontrado == false){
-            if (id <= 0 && id > stock.size()){
+        while (encontrado == false && index < stock.size()){
+            if (id < 0 && id > stock.size()){
                 encontrado = true;
             }
             else{
                 producto = stock.get(index);
             }
-            
+
             if (producto != null && producto.getID() == id){    
                 producto = stock.get(index);
                 encontrado = true;
@@ -71,7 +72,7 @@ public class StockManager
         }
         return producto;
     }
-    
+
     /**
      * Locate a product with the given ID, and return how
      * many of this item are in stock. If the ID does not
@@ -96,6 +97,19 @@ public class StockManager
         for ( Product producto: stock)
         {
             System.out.println(producto);
+        }
+    }
+
+    /**
+     * Print details of all the products under a given number in stock.
+     */
+    public void underGivenNumberInStock(int number)
+    {
+        for ( Product producto: stock)
+        {
+            if (producto.getQuantity() < number){
+                System.out.println(producto);
+            }
         }
     }
 }
